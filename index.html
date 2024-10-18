@@ -235,38 +235,70 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculatePrice() {
-        var houseSize = parseFloat(document.getElementById("houseSize").value);
-        var floors = parseInt(document.getElementById("floors").value);
-        var paintQuality = document.getElementById("paintQuality").value;
+    var houseSize = parseFloat(document.getElementById("houseSize").value);
+    var floors = parseInt(document.getElementById("floors").value);
+    var paintQuality = document.getElementById("paintQuality").value;
+    var houseType = document.getElementById("houseType").value;
 
-        let pricePerSquareMeter;
-        switch(paintQuality) {
-            case 'budget':
-                pricePerSquareMeter = 100; // NOK
-                break;
-            case 'standard':
-                pricePerSquareMeter = 150; // NOK
-                break;
-            case 'premium':
-                pricePerSquareMeter = 200; // NOK
-                break;
-            default:
-                pricePerSquareMeter = 150; // Default to standard if somehow not selected
-        }
+    // Estimate wall height based on number of floors
+    var wallHeight = floors * 2.5; // Assuming 2.5 meters per floor
 
-        let totalPrice = houseSize * pricePerSquareMeter;
-        
-        if (floors > 1) {
-            totalPrice *= (1 + (floors - 1) * 0.1); // 10% extra per additional floor
-        }
-
-        calculatorResult.innerHTML = `Estimert pris: ${totalPrice.toFixed(2)} NOK`;
-        calculatorResult.style.display = "block";
-        
-        // Hide the form and show the success message
-        form.style.display = "none";
-        successMessage.style.display = "block";
+    // Estimate exterior wall area
+    var exteriorWallArea;
+    switch(houseType) {
+        case 'enebolig': // Detached house
+            // Assuming a square footprint, calculate perimeter
+            var sideLengthEstimate = Math.sqrt(houseSize);
+            exteriorWallArea = sideLengthEstimate * 4 * wallHeight;
+            break;
+        case 'rekkehus': // Row house
+            // Assuming two exposed walls
+            var frontLength = Math.sqrt(houseSize);
+            exteriorWallArea = (frontLength * 2) * wallHeight;
+            break;
+        case 'leilighet': // Apartment
+            // Assuming one exposed wall
+            var frontLength = Math.sqrt(houseSize);
+            exteriorWallArea = frontLength * wallHeight;
+            break;
+        default:
+            // Default to detached house calculation if type is unknown
+            var sideLengthEstimate = Math.sqrt(houseSize);
+            exteriorWallArea = sideLengthEstimate * 4 * wallHeight;
     }
+
+    // Add 20% to account for windows, doors, and potential miscalculations
+    exteriorWallArea *= 1.2;
+
+    let pricePerSquareMeter;
+    switch(paintQuality) {
+        case 'budget':
+            pricePerSquareMeter = 100; // NOK
+            break;
+        case 'standard':
+            pricePerSquareMeter = 150; // NOK
+            break;
+        case 'premium':
+            pricePerSquareMeter = 200; // NOK
+            break;
+        default:
+            pricePerSquareMeter = 150; // Default to standard if somehow not selected
+    }
+
+    let totalPrice = exteriorWallArea * pricePerSquareMeter;
+    
+    // Add 10% for each floor above the first for additional complexity
+    if (floors > 1) {
+        totalPrice *= (1 + (floors - 1) * 0.1);
+    }
+
+    calculatorResult.innerHTML = `Estimert pris: ${totalPrice.toFixed(2)} NOK`;
+    calculatorResult.style.display = "block";
+    
+    // Hide the form and show the success message
+    form.style.display = "none";
+    successMessage.style.display = "block";
+}
 
     function resetForm() {
         form.reset();
