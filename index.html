@@ -176,84 +176,107 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modal = document.getElementById("estimateModal");
-            var btn = document.getElementById("ctaButton");
-            var span = document.getElementsByClassName("close")[0];
-            var form = document.getElementById("estimateForm");
-            var successMessage = document.getElementById("successMessage");
-            var calculatorResult = document.getElementById("calculatorResult");
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById("estimateModal");
+    var btn = document.getElementById("ctaButton");
+    var span = document.getElementsByClassName("close")[0];
+    var form = document.getElementById("estimateForm");
+    var successMessage = document.getElementById("successMessage");
+    var calculatorResult = document.getElementById("calculatorResult");
 
-            btn.onclick = function(e) {
-                e.preventDefault();
-                modal.style.display = "block";
+    btn.onclick = function(e) {
+        e.preventDefault();
+        modal.style.display = "block";
+    }
+
+    span.onclick = function() {
+        modal.style.display = "none";
+        resetForm();
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            resetForm();
+        }
+    }
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        if (validateForm()) {
+            calculatePrice();
+        }
+    }
+
+    function validateForm() {
+        var isValid = true;
+        var fields = ["address", "houseSize", "houseType", "floors", "paintQuality", "email"];
+        
+        fields.forEach(function(field) {
+            var element = document.getElementById(field);
+            var errorElement = document.getElementById(field + "Error");
+            
+            if (element.value.trim() === "") {
+                errorElement.textContent = "Dette feltet er påkrevd";
+                isValid = false;
+            } else {
+                errorElement.textContent = "";
             }
+        });
 
-            span.onclick = function() {
-                modal.style.display = "none";
-                resetForm();
-            }
+        var email = document.getElementById("email");
+        if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+            document.getElementById("emailError").textContent = "Vennligst skriv inn en gyldig e-postadresse";
+            isValid = false;
+        }
 
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                    resetForm();
-                }
-            }
+        return isValid;
+    }
 
-            form.onsubmit = function(e) {
-                e.preventDefault();
-                if (validateForm()) {
-                    calculatePrice();
-                }
-            }
+    function calculatePrice() {
+        var houseSize = parseFloat(document.getElementById("houseSize").value);
+        var floors = parseInt(document.getElementById("floors").value);
+        var paintQuality = document.getElementById("paintQuality").value;
 
-            function validateForm() {
-                var isValid = true;
-                var address = document.getElementById("address");
-                var houseSize = document.getElementById("houseSize");
-                var houseType = document.getElementById("houseType");
-                var floors = document.getElementById("floors");
-                var paintQuality = document.getElementById("paintQuality");
-                var email = document.getElementById("email");
+        let pricePerSquareMeter;
+        switch(paintQuality) {
+            case 'budget':
+                pricePerSquareMeter = 100; // NOK
+                break;
+            case 'standard':
+                pricePerSquareMeter = 150; // NOK
+                break;
+            case 'premium':
+                pricePerSquareMeter = 200; // NOK
+                break;
+            default:
+                pricePerSquareMeter = 150; // Default to standard if somehow not selected
+        }
 
-                if (address.value.trim() === "") {
-                    document.getElementById("addressError").textContent = "Vennligst skriv inn en adresse";
-                    isValid = false;
-                } else {
-                    document.getElementById("addressError").textContent = "";
-                }
+        let totalPrice = houseSize * pricePerSquareMeter;
+        
+        if (floors > 1) {
+            totalPrice *= (1 + (floors - 1) * 0.1); // 10% extra per additional floor
+        }
 
-                if (houseSize.value <= 0) {
-                    document.getElementById("houseSizeError").textContent = "Vennligst skriv inn en gyldig husstørrelse";
-                    isValid = false;
-                } else {
-                    document.getElementById("houseSizeError").textContent = "";
-                }
+        calculatorResult.innerHTML = `Estimert pris: ${totalPrice.toFixed(2)} NOK`;
+        calculatorResult.style.display = "block";
+        
+        // Hide the form and show the success message
+        form.style.display = "none";
+        successMessage.style.display = "block";
+    }
 
-                if (houseType.value === "") {
-                    document.getElementById("houseTypeError").textContent = "Vennligst velg en hustype";
-                    isValid = false;
-                } else {
-                    document.getElementById("houseTypeError").textContent = "";
-                }
-
-                if (floors.value <= 0) {
-                    document.getElementById("floorsError").textContent = "Vennligst skriv inn et gyldig antall etasjer";
-                    isValid = false;
-                } else {
-                    document.getElementById("floorsError").textContent = "";
-                }
-
-                if (paintQuality.value === "") {
-                    document.getElementById("paintQualityError").textContent = "Vennligst velg en malingskvalitet";
-                    isValid = false;
-                } else {
-                    document.getElementById("paintQualityError").textContent = "";
-                }
-
-                if (!/^\S+@\S+\.\S+$/.test(email.value)) {
-                    document.getElementById("emailError").textContent = "Vennligst skriv inn en gyldig e-postadresse";
-                    isValid = false;
-                } else {
+    function resetForm() {
+        form.reset();
+        form.style.display = "block";
+        successMessage.style.display = "none";
+        calculatorResult.style.display = "none";
+        var errorElements = document.getElementsByClassName("error");
+        for (var i = 0; i < errorElements.length; i++) {
+            errorElements[i].textContent = "";
+        }
+    }
+});
+</script>
