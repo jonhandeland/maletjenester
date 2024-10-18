@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maletjenester.no | Profesjonell Husmaling i Stavanger - Få Prisestimat</title>
+    <meta name="description" content="Profesjonelle maletjenester i Stavanger. Få nøyaktige prisestimater for husmaling utendørs. Kvalitet og pålitelighet fra lokale eksperter.">
+    <meta name="keywords" content="maletjenester, husmaling, prisestimat, Stavanger, profesjonell maler, husmaling, utendørs maling">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <style>
+        :root {
+            --primary-color: #4052F7;
+            --secondary-color: #FF7D5A;
+            --text-color: #333333;
+            --bg-color: #FFFFFF;
+            --light-bg: #F7F9FC;
+            --error-color: #FF0000;
+            --success-color: #28a745;
+        }
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Poppins', sans-serif; color: var(--text-color); line-height: 1.6;}
+        .container {width: 90%; max-width: 1200px; margin: 0 auto;}
+        header {background-color: var(--bg-color); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000;}
+        nav {display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;}
+        .logo {font-size: 1.5rem; font-weight: 700; color: var(--primary-color);}
+        .nav-links {display: flex; gap: 2rem;}
+        .nav-links a {text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease;}
+        .nav-links a:hover {color: var(--primary-color);}
+        .hero {background-color: var(--light-bg); padding: 8rem 0 4rem; text-align: center;}
+        h1 {font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary-color);}
+        .hero p {font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem;}
+        .cta-button {display: inline-block; background-color: var(--primary-color); color: white; padding: 0.8rem 2rem; border-radius: 5px; text-decoration: none; font-weight: 600; transition: background-color 0.3s ease;}
+        .cta-button:hover {background-color: #3344D0;}
+        .features {padding: 4rem 0;}
+        .features-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;}
+        .feature-card {background-color: var(--light-bg); padding: 2rem; border-radius: 10px; text-align: center;}
+        .feature-card h3 {color: var(--primary-color); margin-bottom: 1rem;}
+        .estimator {background-color: var(--primary-color); color: white; padding: 4rem 0; text-align: center;}
+        .estimator h2 {font-size: 2rem; margin-bottom: 2rem;}
+        .estimate-form {display: flex; justify-content: center; gap: 1rem; max-width: 600px; margin: 0 auto;}
+        .estimate-form input {flex-grow: 1; padding: 0.8rem; border: none; border-radius: 5px;}
+        .estimate-form button {background-color: var(--secondary-color); color: white; border: none; padding: 0.8rem 2rem; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s ease;}
+        .estimate-form button:hover {background-color: #E56A4B;}
+        footer {background-color: var(--light-bg); padding: 2rem 0; text-align: center;}
+        .modal {display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);}
+        .modal-content {background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 10px;}
+        .close {color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;}
+        .close:hover, .close:focus {color: black; text-decoration: none;}
+        .modal-form {display: flex; flex-direction: column; gap: 1rem;}
+        .modal-form input, .modal-form select {padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;}
+        .modal-form button {background-color: var(--primary-color); color: white; border: none; padding: 0.8rem; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s ease;}
+        .modal-form button:hover {background-color: #3344D0;}
+        .error {color: var(--error-color); font-size: 0.9rem; margin-top: 0.2rem;}
+        .success-message {color: var(--success-color); font-weight: bold; margin-top: 1rem;}
+        @media (max-width: 768px) {
+            .nav-links {display: none;}
+            .hero {padding: 6rem 0 3rem;}
+            h1 {font-size: 2rem;}
+            .estimate-form {flex-direction: column;}
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LWS2W7HVZC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LWS2W7HVZC');
+</script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Maletjenester.no</div>
+            <div class="nav-links">
+                <a href="#features">Funksjoner</a>
+                <a href="#estimator">Få Estimat</a>
+                <a href="#about">Om Oss</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Få nøyaktig pris på husmaling på sekunder</h1>
+                <p>Maletjenester.no gir deg en rask og presis prisberegning for maling av ditt hjem, skreddersydd etter dine behov.</p>
+                <a href="#" class="cta-button" id="ctaButton">Få Gratis Estimat</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Presis Prisberegning</h3>
+                        <p>Vår avanserte algoritme gir deg en nøyaktig pris basert på din spesifikke bolig.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Tidsbesparende</h3>
+                        <p>Få øyeblikkelig prisoverslag uten å vente på hjemmebesøk eller manuelle beregninger.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Kvalitetssikrede Malere</h3>
+                        <p>Koble deg med erfarne og pålitelige malere i ditt område.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="estimator" class="estimator">
+            <div class="container">
+                <h2>Beregn din malepris nå</h2>
+                <form class="estimate-form" data-netlify="true" name="quick-estimate">
+                    <input type="text" name="quick-address" placeholder="Skriv inn din adresse" required>
+                    <button type="submit">Få Estimat</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Maletjenester.no. Alle rettigheter reservert.</p>
+        </div>
+    </footer>
+
+    <div id="estimateModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Få ditt malepris-estimat</h2>
+            <form id="estimateForm" class="modal-form" data-netlify="true" name="detailed-estimate">
+                <div>
+                    <input type="text" id="address" name="address" placeholder="Adresse" required>
+                    <div id="addressError" class="error"></div>
+                </div>
+                <div>
+                    <input type="number" id="houseSize" name="houseSize" placeholder="Husstørrelse (kvm)" required>
+                    <div id="houseSizeError" class="error"></div>
+                </div>
+                <div>
+                    <select id="houseType" name="houseType" required>
+                        <option value="">Velg hustype</option>
+                        <option value="enebolig">Enebolig</option>
+                        <option value="rekkehus">Rekkehus</option>
+                        <option value="leilighet">Leilighet</option>
+                    </select>
+                    <div id="houseTypeError" class="error"></div>
+                </div>
+                <div>
+                    <input type="email" id="email" name="email" placeholder="E-postadresse" required>
+                    <div id="emailError" class="error"></div>
+                </div>
+                <button type="submit">Send forespørsel</button>
+            </form>
+            <div id="successMessage" class="success-message" style="display: none;">
+                Takk for din forespørsel! Vi vil kontakte deg snart med et estimat.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById("estimateModal");
+            var btn = document.getElementById("ctaButton");
+            var span = document.getElementsByClassName("close")[0];
+            var form = document.getElementById("estimateForm");
+            var successMessage = document.getElementById("successMessage");
+
+            btn.onclick = function(e) {
+                e.preventDefault();
+                modal.style.display = "block";
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+                resetForm();
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    resetForm();
+                }
+            }
+
+            form.onsubmit = function(e) {
+                if (!validateForm()) {
+                    e.preventDefault();
+                }
+            }
+
+            function validateForm() {
+                var isValid = true;
+                var address = document.getElementById("address");
+                var houseSize = document.getElementById("houseSize");
+                var houseType = document.getElementById("houseType");
+                var email = document.getElementById("email");
+
+                if (address.value.trim() === "") {
+                    document.getElementById("addressError").textContent = "Vennligst skriv inn en adresse";
+                    isValid = false;
+                } else {
+                    document.getElementById("addressError").textContent = "";
+                }
+
+                if (houseSize.value <= 0) {
+                    document.getElementById("houseSizeError").textContent = "Vennligst skriv inn en gyldig husstørrelse";
+                    isValid = false;
+                } else {
+                    document.getElementById("houseSizeError").textContent = "";
+                }
+
+                if (houseType.value === "") {
+                    document.getElementById("houseTypeError").textContent = "Vennligst velg en hustype";
+                    isValid = false;
+                } else {
+                    document.getElementById("houseTypeError").textContent = "";
+                }
+
+                if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+                    document.getElementById("emailError").textContent = "Vennligst skriv inn en gyldig e-postadresse";
+                    isValid = false;
+                } else {
+                    document.getElementById("emailError").textContent = "";
+                }
+
+                return isValid;
+            }
+
+            function resetForm() {
+                form.reset();
+                form.style.display = "block";
+                successMessage.style.display = "none";
+                document.getElementById("addressError").textContent = "";
+                document.getElementById("houseSizeError").textContent = "";
+                document.getElementById("houseTypeError").textContent = "";
+                document.getElementById("emailError").textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>
