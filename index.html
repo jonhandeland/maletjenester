@@ -53,6 +53,7 @@
         .modal-form button:hover {background-color: #3344D0;}
         .error {color: var(--error-color); font-size: 0.9rem; margin-top: 0.2rem;}
         .success-message {color: var(--success-color); font-weight: bold; margin-top: 1rem;}
+        .calculator-result {background-color: var(--light-bg); padding: 1rem; border-radius: 5px; margin-top: 1rem; font-weight: bold;}
         @media (max-width: 768px) {
             .nav-links {display: none;}
             .hero {padding: 6rem 0 3rem;}
@@ -61,14 +62,14 @@
         }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LWS2W7HVZC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWS2W7HVZC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-LWS2W7HVZC');
-</script>
+      gtag('config', 'G-LWS2W7HVZC');
+    </script>
 </head>
 <body>
     <header>
@@ -150,11 +151,25 @@
                     <div id="houseTypeError" class="error"></div>
                 </div>
                 <div>
+                    <input type="number" id="floors" name="floors" placeholder="Antall etasjer" required>
+                    <div id="floorsError" class="error"></div>
+                </div>
+                <div>
+                    <select id="paintQuality" name="paintQuality" required>
+                        <option value="">Velg malingskvalitet</option>
+                        <option value="budget">Budsjett</option>
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                    <div id="paintQualityError" class="error"></div>
+                </div>
+                <div>
                     <input type="email" id="email" name="email" placeholder="E-postadresse" required>
                     <div id="emailError" class="error"></div>
                 </div>
-                <button type="submit">Send forespørsel</button>
+                <button type="submit">Beregn pris</button>
             </form>
+            <div id="calculatorResult" class="calculator-result" style="display: none;"></div>
             <div id="successMessage" class="success-message" style="display: none;">
                 Takk for din forespørsel! Vi vil kontakte deg snart med et estimat.
             </div>
@@ -168,6 +183,7 @@
             var span = document.getElementsByClassName("close")[0];
             var form = document.getElementById("estimateForm");
             var successMessage = document.getElementById("successMessage");
+            var calculatorResult = document.getElementById("calculatorResult");
 
             btn.onclick = function(e) {
                 e.preventDefault();
@@ -187,8 +203,9 @@
             }
 
             form.onsubmit = function(e) {
-                if (!validateForm()) {
-                    e.preventDefault();
+                e.preventDefault();
+                if (validateForm()) {
+                    calculatePrice();
                 }
             }
 
@@ -197,6 +214,8 @@
                 var address = document.getElementById("address");
                 var houseSize = document.getElementById("houseSize");
                 var houseType = document.getElementById("houseType");
+                var floors = document.getElementById("floors");
+                var paintQuality = document.getElementById("paintQuality");
                 var email = document.getElementById("email");
 
                 if (address.value.trim() === "") {
@@ -220,26 +239,21 @@
                     document.getElementById("houseTypeError").textContent = "";
                 }
 
+                if (floors.value <= 0) {
+                    document.getElementById("floorsError").textContent = "Vennligst skriv inn et gyldig antall etasjer";
+                    isValid = false;
+                } else {
+                    document.getElementById("floorsError").textContent = "";
+                }
+
+                if (paintQuality.value === "") {
+                    document.getElementById("paintQualityError").textContent = "Vennligst velg en malingskvalitet";
+                    isValid = false;
+                } else {
+                    document.getElementById("paintQualityError").textContent = "";
+                }
+
                 if (!/^\S+@\S+\.\S+$/.test(email.value)) {
                     document.getElementById("emailError").textContent = "Vennligst skriv inn en gyldig e-postadresse";
                     isValid = false;
                 } else {
-                    document.getElementById("emailError").textContent = "";
-                }
-
-                return isValid;
-            }
-
-            function resetForm() {
-                form.reset();
-                form.style.display = "block";
-                successMessage.style.display = "none";
-                document.getElementById("addressError").textContent = "";
-                document.getElementById("houseSizeError").textContent = "";
-                document.getElementById("houseTypeError").textContent = "";
-                document.getElementById("emailError").textContent = "";
-            }
-        });
-    </script>
-</body>
-</html>
