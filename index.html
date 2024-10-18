@@ -247,22 +247,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var exteriorWallArea;
     switch(houseType) {
         case 'enebolig': // Detached house
-            // Assuming a square footprint, calculate perimeter
             var sideLengthEstimate = Math.sqrt(houseSize);
             exteriorWallArea = sideLengthEstimate * 4 * wallHeight;
             break;
         case 'rekkehus': // Row house
-            // Assuming two exposed walls
             var frontLength = Math.sqrt(houseSize);
             exteriorWallArea = (frontLength * 2) * wallHeight;
             break;
         case 'leilighet': // Apartment
-            // Assuming one exposed wall
             var frontLength = Math.sqrt(houseSize);
             exteriorWallArea = frontLength * wallHeight;
             break;
         default:
-            // Default to detached house calculation if type is unknown
             var sideLengthEstimate = Math.sqrt(houseSize);
             exteriorWallArea = sideLengthEstimate * 4 * wallHeight;
     }
@@ -270,29 +266,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add 20% to account for windows, doors, and potential miscalculations
     exteriorWallArea *= 1.2;
 
-    let pricePerSquareMeter;
+    // Paint cost per square meter (including primer and multiple coats)
+    let paintCostPerSquareMeter;
     switch(paintQuality) {
         case 'budget':
-            pricePerSquareMeter = 100; // NOK
+            paintCostPerSquareMeter = 30; // NOK
             break;
         case 'standard':
-            pricePerSquareMeter = 150; // NOK
+            paintCostPerSquareMeter = 50; // NOK
             break;
         case 'premium':
-            pricePerSquareMeter = 200; // NOK
+            paintCostPerSquareMeter = 80; // NOK
             break;
         default:
-            pricePerSquareMeter = 150; // Default to standard if somehow not selected
+            paintCostPerSquareMeter = 50; // Default to standard
     }
 
-    let totalPrice = exteriorWallArea * pricePerSquareMeter;
-    
-    // Add 10% for each floor above the first for additional complexity
+    // Labor cost per square meter
+    let laborCostPerSquareMeter = 100; // NOK
+
+    // Calculate total paint cost
+    let totalPaintCost = exteriorWallArea * paintCostPerSquareMeter;
+
+    // Calculate total labor cost
+    let totalLaborCost = exteriorWallArea * laborCostPerSquareMeter;
+
+    // Add complexity factor for multi-story buildings
     if (floors > 1) {
-        totalPrice *= (1 + (floors - 1) * 0.1);
+        totalLaborCost *= (1 + (floors - 1) * 0.1);
     }
 
-    calculatorResult.innerHTML = `Estimert pris: ${totalPrice.toFixed(2)} NOK`;
+    let totalPrice = totalPaintCost + totalLaborCost;
+
+    // Add overhead and profit margin (e.g., 20%)
+    totalPrice *= 1.2;
+
+    calculatorResult.innerHTML = `
+        Estimert pris: ${totalPrice.toFixed(2)} NOK<br>
+        (Materialkostnad: ${totalPaintCost.toFixed(2)} NOK, Arbeidskostnad: ${totalLaborCost.toFixed(2)} NOK)
+    `;
     calculatorResult.style.display = "block";
     
     // Hide the form and show the success message
