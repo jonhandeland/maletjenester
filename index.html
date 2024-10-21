@@ -132,7 +132,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Få ditt malepris-estimat</h2>
-            <form id="estimateForm" class="modal-form" data-netlify="true" name="detailed-estimate">
+            <form id="estimateForm" class="modal-form" action="https://github.com/jonhandeland/maletjenester/issues/new" method="get" target="_blank">
                 <div>
                     <input type="text" id="address" name="address" placeholder="Adresse" required>
                     <div id="addressError" class="error"></div>
@@ -168,6 +168,8 @@
                     <div id="emailError" class="error"></div>
                 </div>
                 <button type="submit">Beregn pris</button>
+                <input type="hidden" name="title" value="New Estimate Request">
+                <input type="hidden" name="body" id="issueBody">
             </form>
             <div id="calculatorResult" class="calculator-result" style="display: none;"></div>
             <div id="successMessage" class="success-message" style="display: none;">
@@ -234,11 +236,13 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
 
-    function calculatePrice() {
+   function calculatePrice() {
     var houseSize = parseFloat(document.getElementById("houseSize").value);
     var floors = parseInt(document.getElementById("floors").value);
     var paintQuality = document.getElementById("paintQuality").value;
     var houseType = document.getElementById("houseType").value;
+    var address = document.getElementById("address").value;
+    var email = document.getElementById("email").value;
 
     // Estimate wall height based on number of floors
     var wallHeight = floors * 2.5; // Assuming 2.5 meters per floor
@@ -301,12 +305,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add overhead and profit margin (e.g., 20%)
     totalPrice *= 1.2;
 
-    calculatorResult.innerHTML = `
-        Estimert pris: ${totalPrice.toFixed(2)} NOK<br>
+    var resultText = `
+        Estimert pris: ${totalPrice.toFixed(2)} NOK
         (Materialkostnad: ${totalPaintCost.toFixed(2)} NOK, Arbeidskostnad: ${totalLaborCost.toFixed(2)} NOK)
     `;
+
+    var issueBody = `
+New estimate request:
+
+- Address: ${address}
+- House Size: ${houseSize} kvm
+- House Type: ${houseType}
+- Floors: ${floors}
+- Paint Quality: ${paintQuality}
+- Email: ${email}
+
+${resultText}
+    `;
+
+    document.getElementById("issueBody").value = issueBody;
+
+    calculatorResult.innerHTML = resultText;
     calculatorResult.style.display = "block";
     
+    // Submit the form
+    form.submit();
+
     // Hide the form and show the success message
     form.style.display = "none";
     successMessage.style.display = "block";
