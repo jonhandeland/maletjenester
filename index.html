@@ -114,6 +114,10 @@
         <section id="estimator" class="estimator">
             <div class="container">
                 <h2>Beregn din malepris nå</h2>
+                <form class="estimate-form" data-netlify="true" name="quick-estimate">
+                    <input type="text" name="quick-address" placeholder="Skriv inn din adresse" required>
+                    <button type="submit">Få Estimat</button>
+                </form>
             </div>
         </section>
     </main>
@@ -128,7 +132,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Få ditt malepris-estimat</h2>
-            <form id="estimateForm" class="modal-form" action="https://github.com/jonhandeland/maletjenester/issues/new" method="get" target="_blank">
+            <form id="estimateForm" class="modal-form" data-netlify="true" name="detailed-estimate">
                 <div>
                     <input type="text" id="address" name="address" placeholder="Adresse" required>
                     <div id="addressError" class="error"></div>
@@ -164,8 +168,6 @@
                     <div id="emailError" class="error"></div>
                 </div>
                 <button type="submit">Beregn pris</button>
-                <input type="hidden" name="title" value="New Estimate Request">
-                <input type="hidden" name="body" id="issueBody">
             </form>
             <div id="calculatorResult" class="calculator-result" style="display: none;"></div>
             <div id="successMessage" class="success-message" style="display: none;">
@@ -203,9 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.onsubmit = function(e) {
         e.preventDefault();
         if (validateForm()) {
-            var price = calculatePrice();
-            displayPrice(price);
-            createGitHubIssue(price);
+            calculatePrice();
         }
     }
 
@@ -235,63 +235,82 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calculatePrice() {
-        // ... (keep the existing calculatePrice function as is) ...
+    var houseSize = parseFloat(document.getElementById("houseSize").value);
+    var floors = parseInt(document.getElementById("floors").value);
+    var paintQuality = document.getElementById("paintQuality").value;
+    var houseType = document.getElementById("houseType").value;
+
+    // Estimate wall height based on number of floors
+    var wallHeight = floors * 2.5; // Assuming 2.5 meters per floor
+
+    // Estimate exterior wall area
+    var exteriorWallArea;
+    switch(houseType) {
+        case 'enebolig': // Detached house
+            var sideLengthEstimate = Math.sqrt(houseSize);
+            exteriorWallArea = sideLengthEstimate * 4 * wallHeight;
+            break;
+        case 'rekkehus': // Row house
+            var frontLength = Math.sqrt(houseSize);
+            exteriorWallArea = (frontLength * 2) * wallHeight;
+            break;
+        case 'leilighet': // Apartment
+            var frontLength = Math.sqrt(houseSize);
+            exteriorWallArea = frontLength * wallHeight;
+            break;
+        default:
+            var sideLengthEstimate = Math.sqrt(houseSize);
+            exteriorWallArea = sideLengthEstimate * 4 * wallHeight;
     }
 
-    function displayPrice(price) {
-        var resultText = `
-            Estimert pris: ${price.total.toFixed(2)} NOK
-            (Materialkostnad: ${price.materials.toFixed(2)} NOK, Arbeidskostnad: ${price.labor.toFixed(2)} NOK)
-        `;
-        calculatorResult.innerHTML = resultText;
-        calculatorResult.style.display = "block";
+    // Add 20% to account for windows, doors, and potential miscalculations
+    exteriorWallArea *= 1.2;
+
+    // Paint cost per square meter (including primer and multiple coats)
+    let paintCostPerSquareMeter;
+    switch(paintQuality) {
+        case 'budget':
+            paintCostPerSquareMeter = 30; // NOK
+            break;
+        case 'standard':
+            paintCostPerSquareMeter = 50; // NOK
+            break;
+        case 'premium':
+            paintCostPerSquareMeter = 80; // NOK
+            break;
+        default:
+            paintCostPerSquareMeter = 50; // Default to standard
     }
 
-    function createGitHubIssue(price) {
-        var title = "New Estimate Request: " + document.getElementById("address").value;
-        var body = generateIssueBody(price);
+    // Labor cost per square meter
+    let laborCostPerSquareMeter = 100; // NOK
 
-        // Replace 'YOUR_GITHUB_TOKEN' with a personal access token you create on GitHub
-        var token = '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';
+    // Calculate total paint cost
+    let totalPaintCost = exteriorWallArea * paintCostPerSquareMeter;
 
-        fetch('https://api.github.com/repos/jonhandeland/maletjenester/issues', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'token ' + token,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: title,
-                body: body
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('GitHub Issue created:', data.html_url);
-            showSuccessMessage();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Det oppstod en feil. Vennligst prøv igjen senere.');
-        });
+    // Calculate total labor cost
+    let totalLaborCost = exteriorWallArea * laborCostPerSquareMeter;
+
+    // Add complexity factor for multi-story buildings
+    if (floors > 1) {
+        totalLaborCost *= (1 + (floors - 1) * 0.1);
     }
 
-    function generateIssueBody(price) {
-        var fields = ["address", "houseSize", "houseType", "floors", "paintQuality", "email"];
-        var body = "New estimate request:\n\n";
-        fields.forEach(function(field) {
-            body += `- ${field.charAt(0).toUpperCase() + field.slice(1)}: ${document.getElementById(field).value}\n`;
-        });
-        body += `\nEstimated Price: ${price.total.toFixed(2)} NOK\n`;
-        body += `Materials Cost: ${price.materials.toFixed(2)} NOK\n`;
-        body += `Labor Cost: ${price.labor.toFixed(2)} NOK`;
-        return body;
-    }
+    let totalPrice = totalPaintCost + totalLaborCost;
 
-    function showSuccessMessage() {
-        form.style.display = "none";
-        successMessage.style.display = "block";
-    }
+    // Add overhead and profit margin (e.g., 20%)
+    totalPrice *= 1.2;
+
+    calculatorResult.innerHTML = `
+        Estimert pris: ${totalPrice.toFixed(2)} NOK<br>
+        (Materialkostnad: ${totalPaintCost.toFixed(2)} NOK, Arbeidskostnad: ${totalLaborCost.toFixed(2)} NOK)
+    `;
+    calculatorResult.style.display = "block";
+    
+    // Hide the form and show the success message
+    form.style.display = "none";
+    successMessage.style.display = "block";
+}
 
     function resetForm() {
         form.reset();
