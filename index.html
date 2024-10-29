@@ -111,71 +111,69 @@
             </div>
         </section>
 
-        <section id="estimator" class="estimator">
-            <div class="container">
-                <h2>Beregn din malepris nå</h2>
-               <form class="estimate-form" action="https://formspree.io/f/xbljdegv" method="POST">
-                    <input type="text" name="quick-address" placeholder="Skriv inn din adresse" required>
-                    <button type="submit">Få Estimat</button>
-                </form>
-            </div>
-        </section>
-    </main>
+        <!-- First form (Quick estimate) -->
+<section id="estimator" class="estimator">
+    <div class="container">
+        <h2>Beregn din malepris nå</h2>
+        <form class="estimate-form" action="https://formspree.io/f/xbljdegv" method="POST">
+            <input type="text" name="quick-address" placeholder="Skriv inn din adresse" required>
+            <button type="submit">Få Estimat</button>
+        </form>
+    </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Maletjenester.no. Alle rettigheter reservert.</p>
-        </div>
-    </footer>
-
-    <div id="estimateModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Få ditt malepris-estimat</h2>
-            <form id="estimateForm" class="modal-form" action="https://formspree.io/f/xbljdegv" method="POST">
-                <div>
-                    <input type="text" id="address" name="address" placeholder="Adresse" required>
-                    <div id="addressError" class="error"></div>
-                </div>
-                <div>
-                    <input type="number" id="houseSize" name="houseSize" placeholder="Husstørrelse (kvm)" required>
-                    <div id="houseSizeError" class="error"></div>
-                </div>
-                <div>
-                    <select id="houseType" name="houseType" required>
-                        <option value="">Velg hustype</option>
-                        <option value="enebolig">Enebolig</option>
-                        <option value="rekkehus">Rekkehus</option>
-                        <option value="leilighet">Leilighet</option>
-                    </select>
-                    <div id="houseTypeError" class="error"></div>
-                </div>
-                <div>
-                    <input type="number" id="floors" name="floors" placeholder="Antall etasjer" required>
-                    <div id="floorsError" class="error"></div>
-                </div>
-                <div>
-                    <select id="paintQuality" name="paintQuality" required>
-                        <option value="">Velg malingskvalitet</option>
-                        <option value="budget">Budsjett</option>
-                        <option value="standard">Standard</option>
-                        <option value="premium">Premium</option>
-                    </select>
-                    <div id="paintQualityError" class="error"></div>
-                </div>
-                <div>
-                    <input type="email" id="email" name="email" placeholder="E-postadresse" required>
-                    <div id="emailError" class="error"></div>
-                </div>
-                <button type="submit">Beregn pris</button>
-            </form>
-            <div id="calculatorResult" class="calculator-result" style="display: none;"></div>
-            <div id="successMessage" class="success-message" style="display: none;">
-                Takk for din forespørsel! Vi vil kontakte deg snart med et estimat.
+<!-- Modal with detailed estimate form -->
+<div id="estimateModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Få ditt malepris-estimat</h2>
+        <form id="estimateForm" class="modal-form" action="https://formspree.io/f/xbljdegv" method="POST">
+            <input type="hidden" id="calculatedPrice" name="calculatedPrice" value="">
+            
+            <div>
+                <input type="text" id="address" name="address" placeholder="Adresse" required>
+                <div id="addressError" class="error"></div>
             </div>
+            <div>
+                <input type="number" id="houseSize" name="houseSize" placeholder="Husstørrelse (kvm)" required>
+                <div id="houseSizeError" class="error"></div>
+            </div>
+            <div>
+                <select id="houseType" name="houseType" required>
+                    <option value="">Velg hustype</option>
+                    <option value="enebolig">Enebolig</option>
+                    <option value="rekkehus">Rekkehus</option>
+                    <option value="leilighet">Leilighet</option>
+                </select>
+                <div id="houseTypeError" class="error"></div>
+            </div>
+            <div>
+                <input type="number" id="floors" name="floors" placeholder="Antall etasjer" required>
+                <div id="floorsError" class="error"></div>
+            </div>
+            <div>
+                <select id="paintQuality" name="paintQuality" required>
+                    <option value="">Velg malingskvalitet</option>
+                    <option value="budget">Budsjett</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                </select>
+                <div id="paintQualityError" class="error"></div>
+            </div>
+            <div>
+                <input type="email" id="email" name="email" placeholder="E-postadresse" required>
+                <div id="emailError" class="error"></div>
+            </div>
+            <button type="submit">Beregn pris</button>
+        </form>
+        <div id="calculatorResult" class="calculator-result" style="display: none;"></div>
+        <div id="successMessage" class="success-message" style="display: none;">
+            Takk for din forespørsel! Vi vil kontakte deg snart med et estimat.
         </div>
     </div>
+</div>
 
+<!-- Complete JavaScript code -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById("estimateModal");
@@ -206,9 +204,10 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         if (validateForm()) {
             var price = calculatePrice();
-            document.getElementById("calculatedPrice").value = price;
-
+            
+            // Create FormData and append the calculated price
             const formData = new FormData(form);
+            formData.append('calculatedPrice', price.toFixed(2));
 
             try {
                 const response = await fetch(form.action, {
@@ -219,11 +218,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                const data = await response.json();
-
-                if (data.ok) {
+                if (response.ok) {
+                    // Show the price to the customer
                     calculatorResult.innerHTML = `Estimert pris: ${price.toFixed(2)} NOK`;
                     calculatorResult.style.display = "block";
+                    
+                    // Hide the form and show success message
                     form.style.display = "none";
                     successMessage.style.display = "block";
                 } else {
