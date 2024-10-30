@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://maletjenester.no/sitemap.xml
+
+# Optimize crawling
+Crawl-delay: 10
