@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <title>Maletips og Råd | Blogg | Maletjenester.no</title>
-    <meta name="description" content="Eksperttips om husmaling, vedlikehold og fargevalg. Les våre fagartikler om utvendig maling og få profesjonelle råd for ditt maleprosjekt.">
-    <meta name="keywords" content="maletips, husmaling blogg, malingsråd, vedlikehold av hus, fargevalg fasade, male hus tips">
+    <title>Maletips og Ekspertråd | Blogg | Maletjenester.no</title>
+    <meta name="description" content="Les våre eksperttips om husmaling, vedlikehold og fargevalg. Praktiske råd og profesjonelle tips for ditt maleprosjekt fra erfarne malere i Stavanger.">
+    <meta name="keywords" content="male hus, husmaling tips, malertips, vedlikehold tips, male hus stavanger">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Maletips og Råd | Maletjenester.no Blogg">
-    <meta property="og:description" content="Eksperttips og råd om husmaling fra profesjonelle malere i Stavanger.">
-    <meta property="og:url" content="https://maletjenester.no/blogg.html">
-    <meta property="og:type" content="blog">
-    
+    <meta property="og:title" content="Maletips og Ekspertråd | Maletjenester.no">
+    <meta property="og:description" content="Profesjonelle tips og råd om husmaling fra eksperter i Stavanger.">
+    <meta property="og:url" content="https://maletjenester.no/blogg">
+    <meta property="og:type" content="website">
+
     <!-- Your existing styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Use the same styles as your main page -->
     <style>
-        /* Copy your existing root variables and basic styles */
         :root {
             --primary-color: #4052F7;
             --secondary-color: #FF7D5A;
@@ -33,7 +31,7 @@
         body {font-family: 'Poppins', sans-serif; color: var(--text-color); line-height: 1.6;}
         .container {width: 90%; max-width: 1200px; margin: 0 auto;}
         
-        /* Header and Nav styles (copy from your main CSS) */
+        /* Header and Nav styles */
         header {background-color: var(--bg-color); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000;}
         nav {display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;}
         .logo {font-size: 1.5rem; font-weight: 700; color: var(--primary-color);}
@@ -60,42 +58,56 @@
             padding: 4rem 0;
         }
 
-        .blog-post {
+        .blog-card {
             background: var(--bg-color);
-            padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        .blog-post h2 {
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-card__content {
+            padding: 1.5rem;
+        }
+
+        .blog-card__title {
             color: var(--primary-color);
             margin-bottom: 1rem;
+            font-size: 1.25rem;
         }
 
-        .post-meta {
+        .blog-card__meta {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
-        .blog-post ul {
+        .blog-card__excerpt {
+            margin-bottom: 1rem;
+        }
+
+        .blog-card__excerpt ul {
             margin: 1rem 0;
             padding-left: 1.5rem;
         }
 
-        .blog-post li {
+        .blog-card__excerpt li {
             margin-bottom: 0.5rem;
+            font-size: 0.95rem;
         }
 
-        .read-more {
-            display: inline-block;
+        .blog-card__link {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
-            margin-top: 1rem;
+            display: inline-block;
         }
 
-        .read-more:hover {
+        .blog-card__link:hover {
             text-decoration: underline;
         }
 
@@ -107,7 +119,6 @@
     </style>
 </head>
 <body>
-    <!-- Same header as main page -->
     <header>
         <nav class="container">
             <div class="logo">Maletjenester.no</div>
@@ -125,75 +136,73 @@
     <main>
         <section class="blog-header">
             <div class="container">
-                <h1>Maletips og Råd</h1>
+                <h1>Maletips og Ekspertråd</h1>
                 <p>Eksperttips og profesjonelle råd om husmaling og vedlikehold</p>
             </div>
         </section>
 
-        <section class="blog-content">
-            <div class="container">
-                <div class="blog-grid">
-                   <div class="blog-grid">
-    <!-- First Blog Post Card -->
-    <article class="blog-card">
-        <div class="blog-card__content">
-            <h2 class="blog-card__title">Slik Forbereder du Huset for Maling</h2>
-            <div class="blog-card__meta">
-                <time datetime="2024-01-30">30. januar 2024</time>
-            </div>
-            <p class="blog-card__excerpt">
-                God forberedelse er nøkkelen til et vellykket malerarbeid. Her er våre beste tips for forarbeidet:
-                <ul>
-                    <li>Start med grundig rengjøring av fasaden</li>
-                    <li>Fjern all løs maling og råtne trebord</li>
-                    <li>Reparer sprekker og hull</li>
-                    <li>Sørg for god tildekking av vinduer og dører</li>
-                </ul>
-            </p>
-            <a href="/blogg/forberede-huset-for-maling.html" class="blog-card__link">Les mer</a>
-        </div>
-    </article>
+        <section class="container">
+            <div class="blog-grid">
+                <!-- First Blog Post Card -->
+                <article class="blog-card">
+                    <div class="blog-card__content">
+                        <h2 class="blog-card__title">Slik Forbereder du Huset for Maling</h2>
+                        <div class="blog-card__meta">
+                            <time datetime="2024-01-30">30. januar 2024</time>
+                        </div>
+                        <div class="blog-card__excerpt">
+                            <p>God forberedelse er nøkkelen til et vellykket malerarbeid. Her er våre beste tips for forarbeidet:</p>
+                            <ul>
+                                <li>Start med grundig rengjøring av fasaden</li>
+                                <li>Fjern all løs maling og råtne trebord</li>
+                                <li>Reparer sprekker og hull</li>
+                                <li>Sørg for god tildekking av vinduer og dører</li>
+                            </ul>
+                        </div>
+                        <a href="/blogg/forberede-huset-for-maling.html" class="blog-card__link">Les mer</a>
+                    </div>
+                </article>
 
-    <!-- Second Blog Post Card -->
-    <article class="blog-card">
-        <div class="blog-card__content">
-            <h2 class="blog-card__title">Velg Riktig Maling til Ditt Hus</h2>
-            <div class="blog-card__meta">
-                <time datetime="2024-01-25">25. januar 2024</time>
-            </div>
-            <p class="blog-card__excerpt">
-                Forskjellige overflater krever ulike malingstyper. Vi går gjennom de viktigste faktorene:
-                <ul>
-                    <li>Linoljemaling vs. akrylmaling</li>
-                    <li>Betydningen av riktig grunning</li>
-                    <li>Værbestandighet og holdbarhet</li>
-                    <li>Fargevalg og miljøhensyn</li>
-                </ul>
-            </p>
-            <a href="/blogg/velge-riktig-maling.html" class="blog-card__link">Les mer</a>
-        </div>
-    </article>
+                <!-- Second Blog Post Card -->
+                <article class="blog-card">
+                    <div class="blog-card__content">
+                        <h2 class="blog-card__title">Velg Riktig Maling til Ditt Hus</h2>
+                        <div class="blog-card__meta">
+                            <time datetime="2024-01-25">25. januar 2024</time>
+                        </div>
+                        <div class="blog-card__excerpt">
+                            <p>Forskjellige overflater krever ulike malingstyper. Vi går gjennom de viktigste faktorene:</p>
+                            <ul>
+                                <li>Linoljemaling vs. akrylmaling</li>
+                                <li>Betydningen av riktig grunning</li>
+                                <li>Værbestandighet og holdbarhet</li>
+                                <li>Fargevalg og miljøhensyn</li>
+                            </ul>
+                        </div>
+                        <a href="/blogg/velge-riktig-maling.html" class="blog-card__link">Les mer</a>
+                    </div>
+                </article>
 
-    <!-- Third Blog Post Card -->
-    <article class="blog-card">
-        <div class="blog-card__content">
-            <h2 class="blog-card__title">5 Tegn på at Huset Trenger Maling</h2>
-            <div class="blog-card__meta">
-                <time datetime="2024-01-20">20. januar 2024</time>
+                <!-- Third Blog Post Card -->
+                <article class="blog-card">
+                    <div class="blog-card__content">
+                        <h2 class="blog-card__title">5 Tegn på at Huset Trenger Maling</h2>
+                        <div class="blog-card__meta">
+                            <time datetime="2024-01-20">20. januar 2024</time>
+                        </div>
+                        <div class="blog-card__excerpt">
+                            <p>Lær å gjenkjenne tegnene som viser at det er på tide å male:</p>
+                            <ul>
+                                <li>Avflassing og sprekker</li>
+                                <li>Falming og misfarging</li>
+                                <li>Fuktskader og mugg</li>
+                                <li>Økt energiforbruk</li>
+                            </ul>
+                        </div>
+                        <a href="/blogg/tegn-pa-maling.html" class="blog-card__link">Les mer</a>
+                    </div>
+                </article>
             </div>
-            <p class="blog-card__excerpt">
-                Lær å gjenkjenne tegnene som viser at det er på tide å male:
-                <ul>
-                    <li>Avflassing og sprekker</li>
-                    <li>Falming og misfarging</li>
-                    <li>Fuktskader og mugg</li>
-                    <li>Økt energiforbruk</li>
-                </ul>
-            </p>
-            <a href="/blogg/tegn-pa-maling.html" class="blog-card__link">Les mer</a>
-        </div>
-    </article>
-</div>
         </section>
     </main>
 
