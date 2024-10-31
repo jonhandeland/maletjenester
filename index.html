@@ -315,10 +315,10 @@
 <section id="estimator" class="estimator">
     <div class="container">
         <h2>Beregn din malepris nå</h2>
-        <form class="estimate-form" action="https://formspree.io/f/xbljdegv" method="POST">
-            <input type="text" name="quick-address" placeholder="Skriv inn din adresse" required>
-            <button type="submit">Få Estimat</button>
-        </form>
+        <div class="estimate-form">
+            <input type="text" placeholder="Skriv inn din adresse">
+            <button type="button" onclick="document.getElementById('ctaButton').click();">Få Estimat</button>
+        </div>
     </div>
 </section>
 
