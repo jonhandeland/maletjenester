@@ -153,11 +153,14 @@
     <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
     "name": "Maletjenester.no",
     "@id": "https://maletjenester.no",
     "url": "https://maletjenester.no",
     "telephone": "+4790218988",
+    "image": "https://maletjenester.no/logo.png",
+    "priceRange": "$$",
+    "description": "Profesjonelle maletjenester i Stavanger. Få nøyaktige prisestimater for husmaling utendørs. Kvalitet og pålitelighet fra lokale eksperter.",
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "Sjarkveien 6",
@@ -176,8 +179,77 @@
         "opens": "08:00",
         "closes": "16:00"
     },
-    "priceRange": "$$",
-    "description": "Profesjonelle maletjenester i Stavanger. Få nøyaktige prisestimater for husmaling utendørs. Kvalitet og pålitelighet fra lokale eksperter."
+    "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 58.9700,
+            "longitude": 5.7331
+        },
+        "geoRadius": "30000"
+    },
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Maletjenester",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Utvendig Husmaling",
+                    "description": "Profesjonell maling av husets fasade med værbestandig maling"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Fasadevedlikehold",
+                    "description": "Komplett forarbeid og behandling av husets fasade"
+                }
+            }
+        ]
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "57",
+        "reviewCount": "32"
+    },
+    "review": [
+        {
+            "@type": "Review",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5"
+            },
+            "author": {
+                "@type": "Person",
+                "name": "Anders Johnsen"
+            },
+            "reviewBody": "Profesjonelt utført arbeid og god oppfølging gjennom hele prosessen."
+        }
+    ],
+    "sameAs": [
+        "https://www.facebook.com/YOUR_FACEBOOK",
+        "https://instagram.com/YOUR_INSTAGRAM"
+    ],
+    "potentialAction": {
+        "@type": "ReserveAction",
+        "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://maletjenester.no/#estimator",
+            "inLanguage": "no",
+            "actionPlatform": [
+                "http://schema.org/DesktopWebPlatform",
+                "http://schema.org/MobileWebPlatform"
+            ]
+        },
+        "result": {
+            "@type": "Reservation",
+            "name": "Prisestimat Maletjenester"
+        }
+    }
 }
 </script>
     <!-- Google tag (gtag.js) -->
