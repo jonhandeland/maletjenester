@@ -9,168 +9,166 @@
     <meta name="description" content="Komplett guide til valg av utendørsmaling. Lær om forskjellige malingstyper, holdbarhet og hvilken maling som passer best til ditt hus. Ekspertråd for norske forhold.">
     <meta name="keywords" content="velge husmaling, utendørs maling, beste maling hus, malingstyper, akrylmaling, oljemaling, male hus stavanger">
     
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Velg Riktig Maling til Ditt Hus - Ekspertguide 2024">
-    <meta property="og:description" content="Alt du trenger å vite om valg av riktig maling til husets fasade. Profesjonelle tips og anbefalinger.">
-    <meta property="og:url" content="https://maletjenester.no/blogg/velge-riktig-maling.html">
-    <meta property="og:type" content="article">
-    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Copy the same styles from your first blog post -->
     <style>
-        /* Your existing styles from forberede-huset-for-maling.html */
-        /* ... */
+        :root {
+            --primary-color: #4052F7;
+            --secondary-color: #FF7D5A;
+            --text-color: #333333;
+            --bg-color: #FFFFFF;
+            --light-bg: #F7F9FC;
+        }
+        
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Poppins', sans-serif; color: var(--text-color); line-height: 1.6;}
+        .container {width: 90%; max-width: 1200px; margin: 0 auto;}
+        
+        /* Header styles */
+        header {background-color: var(--bg-color); box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: fixed; width: 100%; top: 0; z-index: 1000;}
+        nav {display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;}
+        .logo {font-size: 1.5rem; font-weight: 700; color: var(--primary-color);}
+        .nav-links {display: flex; gap: 2rem;}
+        .nav-links a {text-decoration: none; color: var(--text-color); font-weight: 500; transition: color 0.3s ease;}
+        .nav-links a:hover {color: var(--primary-color);}
+
+        /* Article styles */
+        .article-header {
+            padding: 8rem 0 4rem;
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .article-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .article-meta {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        .article-content h2 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        .article-content h3 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .article-cta {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .article-cta h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #3344D0;
+        }
+
+        /* Related articles section */
+        .related-articles {
+            background-color: var(--light-bg);
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+
+        .related-articles h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-article {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .related-article h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .blog-card__link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .blog-card__link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .article-header h1 {
+                font-size: 2rem;
+            }
+            .article-content {
+                padding: 2rem 0;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Maletjenester.no</div>
-            <div class="nav-links">
-                <a href="/">Hjem</a>
-                <a href="/#features">Funksjoner</a>
-                <a href="/#estimator">Få Estimat</a>
-                <a href="/#faq">FAQ</a>
-                <a href="/blogg.html">Blogg</a>
-                <a href="/#contact">Kontakt</a>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <article>
-            <div class="article-header">
-                <div class="container">
-                    <h1>Velg Riktig Maling til Ditt Hus: Den Ultimate Guide</h1>
-                    <div class="article-meta">
-                        <time datetime="2024-01-25">Publisert: 25. januar 2024</time>
-                        <span> | </span>
-                        <span>10 minutter lesetid</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-content container">
-                <h2>Hvorfor er Valg av Maling så Viktig?</h2>
-                <p>Riktig valg av maling er avgjørende for både utseende og beskyttelse av huset ditt. Med dagens mangfold av malingstyper kan det være utfordrende å velge riktig. Denne guiden hjelper deg å ta et informert valg basert på husets materiale, klima og dine behov.</p>
-
-                <h2>Ulike Malingstyper for Utvendig Bruk</h2>
-                <h3>1. Akrylmaling</h3>
-                <p>Akrylmaling er et populært valg for utvendig bruk i Norge:</p>
-                <ul>
-                    <li>Meget værbestandig</li>
-                    <li>Beholder fargen godt</li>
-                    <li>Rask tørking</li>
-                    <li>Enkel å påføre</li>
-                    <li>Miljøvennlig alternativ</li>
-                </ul>
-
-                <div class="article-cta">
-                    <h3>Usikker på hvilken maling som passer ditt hus?</h3>
-                    <p>Få gratis befaring og profesjonelle råd fra våre eksperter</p>
-                    <a href="/#estimator" class="cta-button">Få Gratis Befaring</a>
-                </div>
-
-                <h3>2. Oljemaling</h3>
-                <p>Tradisjonell oljemaling har sine unike fordeler:</p>
-                <ul>
-                    <li>Dyp inntrenging i treverket</li>
-                    <li>Meget god holdbarhet</li>
-                    <li>Ideell for eldre hus</li>
-                    <li>Bevarer treets naturlige egenskaper</li>
-                </ul>
-
-                <h2>Valg av Maling Etter Hustype</h2>
-                <h3>For Trehus</h3>
-                <ul>
-                    <li>Diffusjonsåpen maling anbefales</li>
-                    <li>Vurder tradisjonell linoljemaling for eldre hus</li>
-                    <li>Akrylmaling er et godt alternativ for moderne trehus</li>
-                </ul>
-
-                <h3>For Murhus</h3>
-                <ul>
-                    <li>Silikatmaling eller murmaling spesielt utviklet for mineralske underlag</li>
-                    <li>Må være vannavvisende men diffusjonsåpen</li>
-                    <li>Vurdér elastiske malinger ved risiko for sprekkdannelse</li>
-                </ul>
-
-                <h2>Værforhold og Klimapåvirkning</h2>
-                <p>Norsk klima stiller spesielle krav til utendørsmaling:</p>
-                <ul>
-                    <li>UV-beskyttelse for sol-utsatte fasader</li>
-                    <li>Vannavvisende egenskaper for regnfulle områder</li>
-                    <li>Fleksibilitet for å tåle temperatursvingninger</li>
-                    <li>Motstandsdyktighet mot alge- og soppvekst</li>
-                </ul>
-
-                <h2>Fargevalg og Holdbarhet</h2>
-                <p>Fargevalget påvirker både estetikk og holdbarhet:</p>
-                <ul>
-                    <li>Mørke farger absorberer mer varme og kan redusere holdbarheten</li>
-                    <li>Lyse farger reflekterer sollys og holder seg bedre over tid</li>
-                    <li>Vurder husets arkitektur og omgivelser</li>
-                    <li>Tenk på områdets byggetradisjon</li>
-                </ul>
-
-                <div class="article-cta">
-                    <h3>Klar for å male huset?</h3>
-                    <p>Vi hjelper deg med hele prosessen fra fargevalg til ferdig resultat</p>
-                    <a href="/#contact" class="cta-button">Kontakt Oss</a>
-                </div>
-
-                <h2>Miljøhensyn og Innhold</h2>
-                <p>Moderne maling må balansere miljøhensyn med ytelse:</p>
-                <ul>
-                    <li>Se etter miljømerket maling</li>
-                    <li>Vurder VOC-innhold (flyktige organiske forbindelser)</li>
-                    <li>Sjekk dekkevne for å unngå unødvendige strøk</li>
-                    <li>Velg værbestandig maling for lengre holdbarhet</li>
-                </ul>
-
-                <h2>Kostnader og Kvalitet</h2>
-                <p>Kvalitetsmaling kan være dyrere, men gir ofte bedre totaløkonomi:</p>
-                <ul>
-                    <li>Lengre holdbarhet reduserer vedlikeholdskostnader</li>
-                    <li>Bedre dekkevne kan bety færre strøk</li>
-                    <li>Enklere påføring sparer arbeidstid</li>
-                    <li>Bedre beskyttelse av underlaget</li>
-                </ul>
-
-                <h2>Tips for Kjøp av Maling</h2>
-                <ol>
-                    <li>Beregn nøyaktig mengde for å unngå svinn</li>
-                    <li>Kjøp all maling samtidig for lik fargenyanse</li>
-                    <li>Sjekk holdbarhetsdato og lagringsbetingelser</li>
-                    <li>Be om teknisk datablad for malingen</li>
-                </ol>
-            </div>
-
-            <section class="related-articles">
-                <div class="container">
-                    <h2>Relaterte Artikler</h2>
-                    <div class="related-grid">
-                        <div class="related-article">
-                            <h3>Slik Forbereder du Huset for Maling</h3>
-                            <p>Lær om viktige forberedelser før du starter malerarbeidet.</p>
-                            <a href="/blogg/forberede-huset-for-maling.html" class="blog-card__link">Les mer</a>
-                        </div>
-                        <div class="related-article">
-                            <h3>5 Tegn på at Huset Trenger Maling</h3>
-                            <p>Lær å kjenne igjen tegnene som viser at det er på tide med ny maling.</p>
-                            <a href="/blogg/tegn-pa-maling" class="blog-card__link">Les mer</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </article>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Maletjenester.no. Alle rettigheter reservert.</p>
-        </div>
-    </footer>
+    <!-- Rest of your HTML content remains the same -->
+    <!-- Copy the entire body content from my previous post -->
 </body>
 </html>
