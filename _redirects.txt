@@ -1,1 +1,6 @@
 /* /index.html 200
+http://maletjenester.no/* https://maletjenester.no/:splat 301!
+http://www.maletjenester.no/* https://maletjenester.no/:splat 301!
+https://www.maletjenester.no/* https://maletjenester.no/:splat 301!
+
+/blogg/* /blogg/:splat 200
